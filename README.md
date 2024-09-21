@@ -1,6 +1,6 @@
-# django-extra-fields
+# django-extra-model-fields
 
-`django-extra-fields` is a Django package that allows you to attach and manage additional fields on any model dynamically. This package is designed to be simple and flexible, enabling you to add key-value pairs to any Django model without modifying the original model structure.
+`django-extra-model-fields` is a Django package that allows you to attach and manage additional fields on any model dynamically. This package is designed to be simple and flexible, enabling you to add key-value pairs to any Django model without modifying the original model structure.
 
 ## Features
 
@@ -10,10 +10,10 @@
 
 ## Installation
 
-You can install `django-extra-fields` via pip. Add it to your `requirements.txt` or install it directly using pip:
+You can install `django-extra-model-fields` via pip. Add it to your `requirements.txt` or install it directly using pip:
 
 ```bash
-pip install django-extra-fields
+pip install django-extra-model-fields
 ```
 
 ## Usage
@@ -55,10 +55,32 @@ pip install django-extra-fields
     You can now use the set_extra_field, get_extra_field, and delete_extra_field methods to manage extra fields:
 
     ```python
-    blog = Blog.objects.create(name="Example")
-    blog.set_extra_field('color', 'blue')
-    color = blog.get_extra_field('color')
-    blog.delete_extra_field('color')
+    blog = Blog.objects.create(title="Intorduction to Computers", content="<p>blog body goes here</p>")
+
+    # setting key value
+    blog.set_value('author', 'John Smith')
+    blog.set_value('meta_data', {'clicks': 100, 'views': 200})
+
+    # getting values
+    blog.get_value('author')  # returns a string: 'John Smith'
+    blog.get_value('meta_data')  # returns a python dict: {'clicks': 100, 'views': 200}
+
+    # getting all keys
+    blog.get_keys()  # return a queryset ['author', 'meta_data']
+
+    # deleting a key-value pair
+    blog.delete_key('author')
+    ```
+
+5. Filtering
+
+    ```python
+    # list all extra_fields
+    blog.extra_fields.all()  # returns a query set of <ExtraField>
+
+    # filter on extra_fields
+    Blog.objects.filter(extra_fields__key='author', extra_fields__value='John Smith')
+    Blog.objects.filter(extra_fields__value__clicks__gte=100)
     ```
 
 5. Add Inline editor on Admin panel

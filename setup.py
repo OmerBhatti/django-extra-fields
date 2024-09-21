@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='django-extra-fields',
+    name='django-extra-model-fields',
     version='0.1',
     packages=find_packages(exclude=["demo*", "demoapp*"]),
     include_package_data=True,
