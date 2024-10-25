@@ -25,7 +25,7 @@ pip install django-extra-model-fields
     ```python
     INSTALLED_APPS = [
         ...
-        'extra_fields',
+        'extra_field',
     ]
     ```
 
@@ -35,7 +35,7 @@ pip install django-extra-model-fields
     
     ```python
     from django.db import models
-    from extra_fields.models import ExtraFieldModel
+    from extra_field.models import ExtraFieldModel
 
     class MyModel(ExtraFieldModel):
         name = models.CharField(max_length=100)
